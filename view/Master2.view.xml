@@ -1,0 +1,38 @@
+<mvc:View controllerName="com.broadspectrum.etime.mgr.view.Master2" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page id="master2Page" navButtonPress="onNavBack" showNavButton="true" title="{Ename}">
+		<subHeader>
+			<Bar id="master2SearchBar">
+				<contentMiddle>
+					<SearchField id="master2SearchField" placeholder="{i18n]master2SearchPlaceholder}" search="onSearch" showRefreshButton="{device]/isNoTouch}"
+						tooltip="{i18n>master2SearchTooltip}" width="100%"></SearchField>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<content>
+			<List growing="true" growingScrollToLoad="true" id="master2List" items="{EmployeeViewSet}" mode="{device]/listMode}" type="Navigation">
+				<CustomListItem tap="onSelect" type="Active">
+					<HBox>
+						<Switch class="switch" customTextOff=" " customTextOn="OK" state="{Isselected}"/>
+						<VBox class="listDouble">
+							<Text text="{Datetxt}"/>
+							<Text text="{Hourstxt}"/>
+						</VBox>
+						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
+							visible="{HasHda}"/>
+						<core:Icon class="listIcons" color="#000000" src="sap-icon://payment-approval"
+							visible="{HasAllowance}"/>
+						<core:Icon class="listIcons" color="#000000" src="sap-icon://comment"
+							visible="{HasComment}"/>
+					</HBox>
+				</CustomListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Select All" type="Default"></Button>
+				<Button text='Approve' type="Accept"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

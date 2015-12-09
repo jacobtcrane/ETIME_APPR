@@ -1,0 +1,99 @@
+<mvc:View controllerName="com.broadspectrum.etime.mgr.view.Detail2" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="true" title="{Ename} - {Datetxt}">
+		<content>
+			<ObjectHeader title="{Awarttxt}"></ObjectHeader>
+			<f:SimpleForm emptySpanM="4" labelSpanL="3" columnsL="1" editable="false" emptySpanL="4" columnsM="1" id="detailForm" labelSpanM="3"
+				layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+				<f:content>
+					<Label id="lblTime" text="Time"/>
+					<Text id="TimeText" text="{Timetxt} / {Hourstxt}"/>
+                    <core:Icon color="#000000" src="sap-icon:/past"
+                        visible="{parts : [{path : 'Vtken'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblWBS" text="WBS"
+					    visible="{parts : [{path : 'Wbstxt'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Text id="WBS" text="{Wbs} / {Wbstxt}"
+					    visible="{parts : [{path : 'Wbstxt'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblOrder" text="Order"
+					    visible="{parts : [{path : 'Srvord'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Text id="Order" text="{Srvord} / {Ordertxt}"
+					    visible="{parts : [{path : 'Srvord'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblNetwork" text="Network"
+					    visible="{parts : [{path : 'Nwh'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Text id="Network" text="{Nwh} / {Networktxt}"
+					    visible="{parts : [{path : 'Nwh'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblOperation" text="Operation"
+					    visible="{parts : [{path : 'Operation'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Text id="Operation" text="{Operation} / {Operationtxt}"
+					    visible="{parts : [{path : 'Operation'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblCause" text="Cause"
+					    visible="{parts : [{path : 'Rsnvar'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Text id="Cause" text="{Rsnvar} / {Rsnvartxt}"
+					    visible="{parts : [{path : 'Rsnvar'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblInteralOrder" text="Internal Order"
+					    visible="{parts : [{path : 'Iaufnr'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Text id="InternalOrder" text="{Iaufnr} / {Iaufnrtxt}"
+					    visible="{parts : [{path : 'Rsnvar'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<Label id="lblHDA" text = "Higher Duties" visible="{HasHDA}"/>
+					<CheckBox id="HDA" selected="{HasHda}" editable="false" visible="{HasHda}"/>
+					<Label id="lblEnote" text="Notes"
+					    visible="{parts : [{path : 'Enote'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					<TextArea id="Enote" value="{Enote}" rows="4" editable="false"
+					    visible="{parts : [{path : 'Enote'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>					    
+				</f:content>
+			</f:SimpleForm>
+			<!--<l:Grid defaultSpan="L12 M12 S12" width="auto">-->
+			<!--	<l:content>-->
+			<!--		<f:Form editable="true" id="detail2Form" maxContainerCols="6">-->
+			<!--			<f:layout>-->
+			<!--				<f:ResponsiveGridLayout columnsL="6" columnsM="6" columnsS="6" emptySpanL="4" emptySpanM="4" labelSpanL="2" labelSpanM="2" labelSpanS="2"/>-->
+			<!--			</f:layout>-->
+			<!--			<f:formContainers>-->
+			<!--				<f:FormContainer>-->
+			<!--					<f:formElements>-->
+			<!--						<f:FormElement label="">-->
+			<!--							<f:fields>-->
+			<!--								<Text id="TimeText" text="{Timetxt}"/>-->
+			<!--								<Text id="HoursTxt" text="{Hourstxt}"/>-->
+			<!--								<core:Icon color="#000000" src="sap-icon:/past"-->
+			<!--									visible="{parts : [{path : 'Vtken'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>-->
+			<!--							</f:fields>-->
+			<!--						</f:FormElement>-->
+			<!--						<f:FormElement>-->
+			<!--							<f:label>-->
+			<!--						        <Label text="WBS"/>-->
+			<!--						    </f:label>-->
+			<!--							<f:fields>-->
+			<!--								<Text value="{Wbs} - {Wbstxt}"/>-->
+			<!--							</f:fields>-->
+			<!--						</f:FormElement>-->
+			<!--						<f:FormElement>-->
+			<!--						<f:label><Label text="Order"/></f:label>-->
+			<!--							<f:fields>-->
+			<!--								<Text value="{Srvord} - {Ordertxt}"/>-->
+			<!--							</f:fields>-->
+			<!--						</f:FormElement>	-->
+			<!--						<f:FormElement>-->
+			<!--						<f:label>-->
+			<!--						    <Label text="Network"/>-->
+			<!--						</f:label>-->
+			<!--							<f:fields>-->
+			<!--								<Text value="{Nwhtxt} - {Networktxt}"/>-->
+			<!--							</f:fields>-->
+			<!--						</f:FormElement>									-->
+			<!--					</f:formElements>-->
+			<!--				</f:FormContainer>-->
+			<!--			</f:formContainers>-->
+			<!--		</f:Form>-->
+			<!--	</l:content>-->
+			<!--</l:Grid>-->
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Reject" type="Reject"></Button>
+				<Button text='Approve' type="Accept"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

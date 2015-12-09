@@ -1,0 +1,47 @@
+{
+  "dataBinding": {
+    "/view/Master.view.xml": {
+      "entitySet": "TeamViewSet"
+    },
+    "/view/Master2.view.xml": {
+      "entitySet": "EmployeeViewSet"
+    },
+    "/view/Detail.view.xml": {
+      "entitySet": "EmployeeViewSet"
+    },
+    "/view/NotFound.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/view/App.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/view/Welcome.view.xml": {
+      "entitySet": "UNBINDKEY"
+    }
+  },
+  "generation": [
+    {
+      "templateId": "ui5template.fioriMasterMasterDetail",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Mon, 07 Dec 2015 12:56:05 GMT"
+    }
+  ],
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZHTR_ETIME_MANAGER_SRV/",
+    "metadataFilePath": "model/metadata.xml",
+    "loadJSONFiles": true,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "deploy": {
+    "destination": "NMD",
+    "name": "ZHTR_ETIME_MGR"
+  }
+}

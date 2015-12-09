@@ -1,0 +1,36 @@
+<mvc:View controllerName="com.broadspectrum.etime.mgr.view.Detail" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="{device]/isPhone}" title="{Ename}">
+		<content>
+			<ObjectHeader condensed="true" title="{Hourstxt}">
+				<attributes>
+					<ObjectAttribute text="{Datetxt}"/>
+				</attributes>
+			</ObjectHeader>
+			<List id="DetailList" items="{DetailViewSet}" type="Navigation">
+				<CustomListItem tap="onNavToItemDetails" type="Active">
+					<HBox>
+						<Switch class="switch" customTextOff=" " customTextOn="OK" state="{Isselected}"/>
+						<VBox class="listDouble">
+							<Text text="{Timetxt}"/>
+							<Text text="{Costtxt}"/>
+						</VBox>
+						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
+							visible="{parts : [{path : 'HasHda'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+						<core:Icon class="listIcons" color="#000000" src="sap-icon://payment-approval"
+							visible="{parts : [{path : 'HasAllowance'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+						<core:Icon class="listIcons" color="#000000" src="sap-icon://comment"
+							visible="{parts : [{path : 'HasComment'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+					</HBox>
+				</CustomListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Select All" type="Default"></Button>
+				<Button text='Approve' type="Accept"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

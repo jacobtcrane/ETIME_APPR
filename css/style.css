@@ -1,0 +1,26 @@
+.spacerTop {
+	margin-top: 2rem;
+}
+
+.switch{
+	margin-top: 5px;
+	margin-bottom: 5px;	
+	margin-left: 10px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.listDouble{
+	margin-top: 5px;
+	margin-bottom: 5px;	
+	margin-left: 5px;
+	margin-right: 5px;
+	min-width: 160px;
+	vertical-align: middle;
+}
+.listIcons{
+    margin-top:8px;
+    margin-bottom:8px;
+    margin-left: 8px;
+    vertical-align: baseline;
+}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="ZHTR_ETIME_MANAGER_SRV" sap:schema-version="1" xml:lang="en" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="TeamView" sap:content-version="1"><Key><PropertyRef Name="Epernr"/></Key><Property MaxLength="8" Name="Mpernr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Personnel No."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="8" Name="Epernr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Personnel No."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Ename" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Empl./Appl.Name"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Epos" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Name"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="20" Name="Hourstxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char20"
+				sap:sortable="false" sap:updatable="false"/><NavigationProperty FromRole="FromRole_team2employee" Name="EmployeeViewSet" Relationship="ZHTR_ETIME_MANAGER_SRV.team2employee"
+				ToRole="ToRole_team2employee"/></EntityType>
+			<EntityType Name="EmployeeView" sap:content-version="1"><Key><PropertyRef Name="Epernr"/><PropertyRef Name="Dateworked"/></Key><Property MaxLength="8" Name="Epernr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:label="Personnel No." sap:sortable="false"
+				sap:updatable="false"/><Property Name="Dateworked" Nullable="false" Precision="7" Type="Edm.DateTime" sap:creatable="false" sap:label="Date" sap:sortable="false"
+				sap:updatable="false"/><Property MaxLength="40" Name="Ename" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Empl./Appl.Name"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="20" Name="Datetxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char20"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="20" Name="Hourstxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char20"
+				sap:sortable="false" sap:updatable="false"/><Property Name="HasComment" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="TRUE" sap:sortable="false"
+				sap:updatable="false"/><Property Name="HasHda" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="TRUE" sap:sortable="false"
+				sap:updatable="false"/><Property Name="HasAllowance" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="TRUE"
+				sap:sortable="false" sap:updatable="false"/><Property Name="Isselected" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="Is Selected"
+				sap:sortable="false" sap:updatable="false"/><NavigationProperty FromRole="ToRole_team2employee" Name="TeamView" Relationship="ZHTR_ETIME_MANAGER_SRV.team2employee"
+				ToRole="FromRole_team2employee"/><NavigationProperty FromRole="FromRole_employee2detail" Name="DetailViewSet" Relationship="ZHTR_ETIME_MANAGER_SRV.employee2detail"
+				ToRole="ToRole_employee2detail"/></EntityType>
+			<EntityType Name="DetailView" sap:content-version="1"><Key><PropertyRef Name="Epernr"/><PropertyRef Name="Dateworked"/><PropertyRef Name="Seqnr"/></Key><Property MaxLength="8" Name="Epernr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:label="Personnel No." sap:sortable="false"
+				sap:updatable="false"/><Property Name="Dateworked" Nullable="false" Precision="7" Type="Edm.DateTime" sap:creatable="false" sap:label="Date" sap:sortable="false"
+				sap:updatable="false"/><Property MaxLength="3" Name="Seqnr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="IT record no."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Ename" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Empl./Appl.Name"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="20" Name="Datetxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char20"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="20" Name="Hourstxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char20"
+				sap:sortable="false" sap:updatable="false"/><Property Name="HasComment" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="TRUE" sap:sortable="false"
+				sap:updatable="false"/><Property Name="HasHda" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="TRUE" sap:sortable="false"
+				sap:updatable="false"/><Property Name="HasAllowance" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="TRUE"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Timetxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Atttxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Costtxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char"
+				sap:sortable="false" sap:updatable="false"/><Property Name="Beguz" Nullable="false" Precision="0" Type="Edm.Time" sap:creatable="false" sap:filterable="false" sap:label="Start time"
+				sap:sortable="false" sap:updatable="false"/><Property Name="Enduz" Nullable="false" Precision="0" Type="Edm.Time" sap:creatable="false" sap:filterable="false" sap:label="End time"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="1" Name="Vtken" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Previous day"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Awart" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Att./abs. type"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="25" Name="Awarttxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="A/A type text"
+				sap:sortable="false" sap:updatable="false"/><Property Name="Stdaz" Nullable="false" Precision="7" Scale="2" Type="Edm.Decimal" sap:creatable="false" sap:filterable="false"
+				sap:label="Att.hours" sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Lgart" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Wage Type"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="25" Name="Lgarttxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Long text"
+				sap:sortable="false" sap:updatable="false"/><Property Name="Anzhl" Nullable="false" Precision="7" Scale="2" Type="Edm.Decimal" sap:creatable="false" sap:filterable="false"
+				sap:label="Number
+				per time
+				unit" sap:sortable="false" sap:updatable="false"/><Property MaxLength="3" Name="Zeinh" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Time unit/meas."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="20" Name="Zeihntxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Unit text"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="12" Name="Srvord" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Order"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Ordertxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="12" Name="Nwh" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Network"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Networktxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="8" Name="Wbs" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Rec. WBS elem."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Wbstxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="12" Name="Iaufnr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Internal Order"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Iaufnrtxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="6" Name="Acttyp" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Activity Type"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Operation" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Oper./Act."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Operationtxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false"
+				sap:label="Opr.
+				short
+				text" sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Rsnvar" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Reason"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="30" Name="Rsnvartxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="144" Name="Enote" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Employee notes"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="144" Name="Mnote" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Manager notes"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="3" Name="Status" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Record Status"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Statustxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Char"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="1" Name="Hda" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="HDA"
+				sap:sortable="false" sap:updatable="false"/><Property Name="Isselected" Nullable="false" Type="Edm.Boolean" sap:creatable="false" sap:filterable="false" sap:label="Is Selected"
+				sap:sortable="false" sap:updatable="false"/><NavigationProperty FromRole="ToRole_employee2detail" Name="EmployeeView" Relationship="ZHTR_ETIME_MANAGER_SRV.employee2detail"
+				ToRole="FromRole_employee2detail"/></EntityType>
+			<Association Name="team2employee" sap:content-version="1"><End Multiplicity="1" Role="FromRole_team2employee" Type="ZHTR_ETIME_MANAGER_SRV.TeamView"/><End Multiplicity="*" Role="ToRole_team2employee" Type="ZHTR_ETIME_MANAGER_SRV.EmployeeView"/><ReferentialConstraint>
+					<Principal Role="FromRole_team2employee"><PropertyRef Name="Epernr"/></Principal>
+					<Dependent Role="ToRole_team2employee"><PropertyRef Name="Epernr"/></Dependent></ReferentialConstraint>
+			</Association>
+			<Association Name="employee2detail" sap:content-version="1"><End Multiplicity="1" Role="FromRole_employee2detail" Type="ZHTR_ETIME_MANAGER_SRV.EmployeeView"/><End Multiplicity="*" Role="ToRole_employee2detail" Type="ZHTR_ETIME_MANAGER_SRV.DetailView"/><ReferentialConstraint>
+					<Principal Role="FromRole_employee2detail"><PropertyRef Name="Dateworked"/><PropertyRef Name="Epernr"/></Principal>
+					<Dependent Role="ToRole_employee2detail"><PropertyRef Name="Dateworked"/><PropertyRef Name="Epernr"/></Dependent></ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZHTR_ETIME_MANAGER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json"><EntitySet EntityType="ZHTR_ETIME_MANAGER_SRV.TeamView" Name="TeamViewSet" sap:content-version="1" sap:creatable="false" sap:deletable="false"
+				sap:pageable="false" sap:updatable="false"/><EntitySet EntityType="ZHTR_ETIME_MANAGER_SRV.EmployeeView" Name="EmployeeViewSet" sap:content-version="1" sap:creatable="false"
+				sap:deletable="false" sap:pageable="false" sap:updatable="false"/><EntitySet EntityType="ZHTR_ETIME_MANAGER_SRV.DetailView" Name="DetailViewSet" sap:content-version="1" sap:creatable="false"
+				sap:deletable="false" sap:pageable="false" sap:updatable="false"/><AssociationSet Association="ZHTR_ETIME_MANAGER_SRV.employee2detail" Name="employee2detailSet" sap:content-version="1" sap:creatable="false"
+				sap:deletable="false" sap:updatable="false"><End EntitySet="EmployeeViewSet" Role="FromRole_employee2detail"/><End EntitySet="DetailViewSet" Role="ToRole_employee2detail"/></AssociationSet>
+				<AssociationSet Association="ZHTR_ETIME_MANAGER_SRV.team2employee" Name="team2employeeSet" sap:content-version="1" sap:creatable="false"
+					sap:deletable="false" sap:updatable="false"><End EntitySet="TeamViewSet" Role="FromRole_team2employee"/><End EntitySet="EmployeeViewSet" Role="ToRole_team2employee"/></AssociationSet></EntityContainer><atom:link href="http://AUNSWDNWGV01.production.transfieldservices.com:8095/sap/opu/odata/SAP/ZHTR_ETIME_MANAGER_SRV/$metadata" rel="self"
+					xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link href="http://AUNSWDNWGV01.production.transfieldservices.com:8095/sap/opu/odata/SAP/ZHTR_ETIME_MANAGER_SRV/$metadata"
+					rel="latest-version" xmlns:atom="http://www.w3.org/2005/Atom"/></Schema></edmx:DataServices>
+</edmx:Edmx>

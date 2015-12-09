@@ -1,0 +1,19 @@
+[{
+	"Epernr": "00000002",
+	"Dateworked": "/Date(1449525600000)/",
+	"Ename": "Frikkie",
+	"Datetxt": "Dec 8",
+	"Hourstxt": "4",
+	"HasComment": "false",
+	"HasHda": "false",
+	"HasAllowance": "false"
+}, {
+	"Epernr": "00000003",
+	"Dateworked": "/Date(1448920800000)/",
+	"Ename": "Kosie",
+	"Datetxt": "Dec 1",
+	"Hourstxt": "3",
+	"HasComment": "true",
+	"HasHda": "false",
+	"HasAllowance": "true"
+}]
