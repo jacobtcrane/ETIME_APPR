@@ -84,7 +84,13 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 				 	name: "detail2",
 					view: "Detail2",
 					viewLevel: 3    
-				}
+				},
+				{
+				    pattern: "DetailViewSet/{Epernr}/{Dateworked}",
+				 	name: "detail1",
+					view: "Detail",
+					viewLevel: 3    
+				}				
 		    ]
 		}
 // 		detailPageRoutes: {

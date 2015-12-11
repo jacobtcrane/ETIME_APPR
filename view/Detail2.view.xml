@@ -91,7 +91,7 @@
 		<footer>
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Button text="Reject" type="Reject"></Button>
+				<Button text="Reject" type="Reject" press="onRejectDialog"></Button>
 				<Button text='Approve' type="Accept"/>
 			</Toolbar>
 		</footer>

@@ -1,4 +1,7 @@
 jQuery.sap.require("com.broadspectrum.etime.mgr.util.Formatter");
+jQuery.sap.require("sap.ca.ui.dialog.factory");
+jQuery.sap.require("sap.ca.scfld.md.controller.BaseDetailController");
+jQuery.sap.require("sap.ca.ui.message.message");
 sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 
 	onInit: function() {
@@ -93,10 +96,25 @@ this.fireDetailChanged(sEntityPath);
 		this.getEventBus().publish("DetailViewSet", "NotFound");
 	},
 
-	onNavBack: function() {
-		// TODO - make this work.  Going to show on all devices now
-		
-// 		this.getRouter().myNavBack("main");
+	onNavBack: function(e) {
+// 		this.getRouter().myNavBack("detail");
+		this.getRouter().myNavToWithoutHash({
+			currentView: this.getView(),
+			targetViewName: "com.broadspectrum.etime.mgr.view.Detail",
+			targetViewType: "XML",
+			transition: "slide"
+		});
+		var b = e.getSource().getBindingContext().getPath();
+		var m = this.getView().getModel();
+		//the date is formatted to a string so we get it from the path and reformat since its easier and should be the same at this point		
+		var dateworked = b.split(",")[1];
+		dateworked = dateworked.replace(/%3A/g, ':');
+		dateworked = dateworked.split('=')[1];
+		this.getRouter().navTo("detail1", {
+			Epernr: this.oView.getBindingContext().getProperty("Epernr"),
+			// 			Dateworked: this.oView.getBindingContext().getProperty("Dateworked"),
+			Dateworked: dateworked
+		}, true);
 	},
 
 	onDetailSelect: function(oEvent) {
@@ -115,5 +133,39 @@ this.fireDetailChanged(sEntityPath);
 
 	onExit: function(oEvent) {
 		this.getEventBus().unsubscribe("Detail", "LoadFinished", this.onMasterLoaded, this);
-	}
+	},
+	
+    onRejectDialog: function () {
+			var dialog = new sap.m.Dialog({
+				title: 'Reject',
+				type: 'Message',
+				content: [
+					new sap.m.Text({ text: 'Are you sure you want to reject this entry?' }),
+					new sap.m.TextArea('rejectDialogTextarea', {
+						width: '100%',
+						placeholder: 'Add note (required)'
+					})
+				],
+				beginButton: new sap.m.Button({
+					text: 'Reject',
+					press: function () {
+						var sText = sap.ui.getCore().byId('rejectDialogTextarea').getValue();
+						sap.m.MessageToast.show('Note is: ' + sText);
+						dialog.close();
+					}
+				}),
+				endButton: new sap.m.Button({
+					text: 'Cancel',
+					press: function () {
+						dialog.close();
+					}
+				}),
+				afterClose: function() {
+					dialog.destroy();
+				}
+			});
+
+			dialog.open();
+		}
+
 });
