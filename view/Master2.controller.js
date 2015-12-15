@@ -128,6 +128,31 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 
 	getRouter: function() {
 		return sap.ui.core.UIComponent.getRouterFor(this);
+	},
+	
+	onSelectAll: function() {
+	    
+	    var bView = this.getView();
+	    var bModel = bView.getModel();
+	    var bData = bModel.oData;
+	    var i;
+	    var j = bData.length;
+	    for (i=0; i<j; i++ ) {
+
+	        if (bData[i].indexOf("EmployeeViewSet") > -1 ){
+	//Set Isselected to X           
+	
+	        }
+	    }
+	   // alert("Select All Code Fired");
+	   // var selected = this.oModel.getProperty(this.oCreatedEntityContext.getPath() + "/Isselected");
+	   // if (selected !== "X") {
+	   //     this.oModel.setProperty(this.oCreatedEntityContext.getPath() + "/Isselected","X");
+	   // }
+	},
+	
+	onApproveSelected: function() {
+	   alert("Approved Code Fired");
 	}
 
 });

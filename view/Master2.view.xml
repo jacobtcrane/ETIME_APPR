@@ -30,8 +30,8 @@
 		<footer>
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Button text="Select All" type="Default"></Button>
-				<Button text='Approve' type="Accept"/>
+				<Button text="Select All" type="Default" press="onSelectAll"></Button>
+				<Button text='Approve' type="Accept" press="onApproveSelected"/>
 			</Toolbar>
 		</footer>
 	</Page>

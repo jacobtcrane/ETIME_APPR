@@ -13,6 +13,7 @@
 						<Switch class="switch" customTextOff=" " customTextOn="OK" state="{Isselected}"/>
 						<VBox class="listDouble">
 							<Text text="{Timetxt}"/>
+							<Text text="{Atttxt}"/>
 							<Text text="{Costtxt}"/>
 						</VBox>
 						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"

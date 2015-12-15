@@ -152,6 +152,7 @@ this.fireDetailChanged(sEntityPath);
 						var sText = sap.ui.getCore().byId('rejectDialogTextarea').getValue();
 						sap.m.MessageToast.show('Note is: ' + sText);
 						dialog.close();
+						
 					}
 				}),
 				endButton: new sap.m.Button({

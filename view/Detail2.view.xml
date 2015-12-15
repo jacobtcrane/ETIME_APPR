@@ -2,7 +2,7 @@
 	xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="true" title="{Ename} - {Datetxt}">
 		<content>
-			<ObjectHeader title="{Awarttxt}"></ObjectHeader>
+			<ObjectHeader title="{Atttxt}"></ObjectHeader>
 			<f:SimpleForm emptySpanM="4" labelSpanL="3" columnsL="1" editable="false" emptySpanL="4" columnsM="1" id="detailForm" labelSpanM="3"
 				layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
 				<f:content>
@@ -92,7 +92,7 @@
 			<Toolbar>
 				<ToolbarSpacer/>
 				<Button text="Reject" type="Reject" press="onRejectDialog"></Button>
-				<Button text='Approve' type="Accept"/>
+				<Button text='Approve' type="Accept" press="onApprove"/>
 			</Toolbar>
 		</footer>
 	</Page>
