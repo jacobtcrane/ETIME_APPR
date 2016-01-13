@@ -135,6 +135,29 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 	    var bView = this.getView();
 	    var bModel = bView.getModel();
 	    var bData = bModel.oData;
+<<<<<<< HEAD
+	    var dstring = bData.toString();
+	    var oArray = $.map(bData, function(value,index){
+	        return [value];
+	    });
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+	    
+var arr =[];	    
+	for( var i in bData ) {
+    if (bData.hasOwnProperty(i)){
+        if (isNumber(i)){
+            arr[i] = bData[i];
+        }else{
+          arr.push(bData[i]);
+        }
+    }
+} 
+	    
+=======
+>>>>>>> 733fd439f275d1f964765a6667dab347ffd73054
 	    var i;
 	    var j = bData.length;
 	    for (i=0; i<j; i++ ) {

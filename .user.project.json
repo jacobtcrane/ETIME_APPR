@@ -8,10 +8,21 @@
       "ui5ActiveVersion": null,
       "ui5VerSource": null,
       "isDefaultVersion": 0,
-      "urlParameters": [],
+      "urlParameters": [
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        },
+        {
+          "paramName": "",
+          "paramValue": "",
+          "paramActive": false
+        }
+      ],
       "_metadata": {
-        "runnerId": "webapprunner",
         "id": 6841366,
+        "runnerId": "webapprunner",
         "displayName": "New Web Application 2"
       }
     },
