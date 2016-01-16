@@ -1,55 +1,28 @@
 jQuery.sap.require("com.broadspectrum.etime.mgr.util.Formatter");
+jQuery.sap.require("com.broadspectrum.etime.mgr.util.Dialogs");
+jQuery.sap.require("sap.m.MessageBox");
+
 sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 
 	onInit: function() {
-		this.oInitialLoadFinishedDeferred = jQuery.Deferred();
-
-		if (sap.ui.Device.system.phone) {
-			//Do not wait for the master2 when in mobile phone resolution
-			this.oInitialLoadFinishedDeferred.resolve();
-		} else {
-			var oEventBus = this.getEventBus();
-			oEventBus.subscribe("Master2", "LoadFinished", this.onMasterLoaded, this);
-		}
-
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
-		// 		this.oRouter.attachRouteMatched(function(e) {
-		// 			if (e.getParameter("name") === "detail") {
-		// 				var d = e.getParameter("arguments").contextPath + "/HeaderDetails";
-		// 				d = d.replace("WorkflowTaskCollection", "/WorkflowTaskCollection");
-		// 				var c = this;
-		// 				if (c.sContext !== d || c.sContext === "") {
-		// 					this.sContext = d;
-		// 					this.refreshScreen(d);
-		// 				}
-		// 			}
-		// 		}, this);
-	},
-
-	onMasterLoaded: function(sChannel, sEvent, oData) {
-		if (oData.oListItem) {
-			this.bindView(oData.oListItem.getBindingContext().getPath());
-			this.oInitialLoadFinishedDeferred.resolve();
-		}
+		this.oRoutingParams = {};
 	},
 
 	onRouteMatched: function(oEvent) {
 		var oParameters = oEvent.getParameters();
-
-		jQuery.when(this.oInitialLoadFinishedDeferred).then(jQuery.proxy(function() {
-
-			// When navigating in the Detail page, update the binding context 
-			if (oParameters.name === "detail") {
-				var sEntityPath = "/" + oParameters.arguments.entity;
-				this.bindView(sEntityPath);
+		if (oParameters.name === "detail") {
+			if (oParameters.arguments.TeamViewEntity &&
+				oParameters.arguments.EmployeeViewEntity) {
+				this.oRoutingParams.TeamViewEntity = oParameters.arguments.TeamViewEntity;
+				this.oRoutingParams.EmployeeViewEntity = oParameters.arguments.EmployeeViewEntity;
 			} else {
+				this.getRouter().navTo("notfound", {}, true); // don't create a history entry
 				return;
 			}
-		}, this));
-		var oEventBus = this.getEventBus();
-		oEventBus.publish("Detail", "LoadFinished", {
-			oListItem: this.getView().byId("DetailList").getItems()[0]
-		});
+			this.bindView("/" + this.oRoutingParams.EmployeeViewEntity);
+			this.checkSubmitButtonEnabled();
+		}
 	},
 
 	bindView: function(sEntityPath) {
@@ -57,29 +30,22 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 		oView.bindElement(sEntityPath);
 
 		//Check if the data is already on the client
-		if (!oView.getModel().getData(sEntityPath)) {
+		if (!this.getModel().getData(sEntityPath)) {
 
 			// Check that the entity specified was found
-			var oData = oView.getModel().getData(sEntityPath);
-			if (!oData) {
-				this.showEmptyView();
-				this.fireDetailNotFound();
-			} else {
-				this.fireDetailChanged(sEntityPath);
-			}
-
-		} else {
-			this.fireDetailChanged(sEntityPath);
+			oView.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
+				var oData = this.getModel().getData(sEntityPath);
+				if (!oData) {
+					this.showEmptyView();
+					this.fireDetailNotFound();
+				}
+			}, this));
 		}
 
 	},
 
 	showEmptyView: function() {
-		this.getRouter().myNavToWithoutHash({
-			currentView: this.getView(),
-			targetViewName: "com.broadspectrum.etime.mgr.view.NotFound",
-			targetViewType: "XML"
-		});
+		this.getRouter().navTo("notfound", {}, true); // don't create a history entry
 	},
 
 	fireDetailChanged: function(sEntityPath) {
@@ -92,19 +58,102 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 		this.getEventBus().publish("Detail", "NotFound");
 	},
 
-	onNavBack: function() {
-		// This is only relevant when running on phone devices
-		this.getRouter().myNavBack("main");
+	getSwitchStateForStatus: function(Status) {
+		if (Status === "APP") {
+			return true;
+		} else {
+			return false;
+		}
 	},
 
-	onDetailSelect: function(oEvent) {
-		sap.ui.core.UIComponent.getRouterFor(this).navTo("detail", {
-			entity: oEvent.getSource().getBindingContext().getPath().slice(1)
-		}, true);
+	checkSubmitButtonEnabled: function() {
+		if (this.getModel().hasPendingChanges()) {
+			this.byId("submitButton").setEnabled(true);
+		} else {
+			this.byId("submitButton").setEnabled(false);
+		}
+	},
+
+	onSwitchChanged: function(oEvent) {
+		var oModel = this.getModel();
+		var sContextPath = oEvent.getSource().getBindingContext().getPath();
+		var pathStatus = sContextPath + '/Status';
+		var pathStatustxt = sContextPath + '/Statustxt';
+		if (oEvent.getParameters().state) {
+			// set status as approved
+			oModel.setProperty(pathStatus, "APP");
+			oModel.setProperty(pathStatustxt, 'Approved');
+		} else {
+			// return status to original
+			// oModel.setProperty(pathStatus, oModel.getOriginalProperty(pathStatus));    // getOriginalProperty() not available in current runtime?
+			// in the absence of method getOriginalProperty() we'll use a hack to access the oData object directly
+			var oOriginalObject = oModel.oData[sContextPath.substr(1)];
+			if (oOriginalObject && oOriginalObject.Status && oOriginalObject.Statustxt) {
+				oModel.setProperty(pathStatus, oOriginalObject.Status);
+				oModel.setProperty(pathStatustxt, oOriginalObject.Statustxt);
+				sap.m.MessageToast.show("Reverted to original status (" + oOriginalObject.Statustxt + ")...");
+			}
+		}
+		oEvent.cancelBubble();
+		this.checkSubmitButtonEnabled();
+	},
+
+	onSelectAllPressed: function(oEvent) {
+		var oModel = this.getModel();
+		var aItems = this.byId("detailList").getItems();
+		aItems.forEach(function(oItem) {
+			// set approved status on each bound model object 
+			oModel.setProperty(oItem.getBindingContext().getPath() + "/Status", "APP");
+		});
+		this.checkSubmitButtonEnabled();
+	},
+
+	onSubmitPressed: function(oEvent) {
+		var oModel = this.getModel();
+		// remove all current messages from message manager
+		sap.ui.getCore().getMessageManager().removeAllMessages();
+
+		// note that we have to specify this submission is only for deferred batch group "detailChanges"
+		// otherwise all service calls get batched together and the success/error outcome is clouded
+		oModel.submitChanges({
+			success: $.proxy(function() {
+				// TODO: until we can figure out why batching doesn't work, check for messages
+				if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
+					// show odata errors in message popover
+					this.showMessagePopover(this.byId("toolbar"));
+				} else {
+					// raise a toast to the user!
+					this.navHistoryBack();
+					sap.m.MessageToast.show("Approvals submitted");
+				}
+			}, this),
+			error: $.proxy(function() {
+				// show odata errors in message popover
+				this.showMessagePopover(this.byId("toolbar"));
+				var msg = 'Approvals submit encountered errors! Pleae review and retry.';
+				sap.m.MessageToast.show(msg);
+			}, this)
+		});
+	},
+
+	showMessagePopover: function(oOpenBy) {
+		com.broadspectrum.etime.mgr.util.Dialogs.getMessagePopover(this).openBy(oOpenBy || this.getView());
+	},
+
+	onNavBack: function() {
+		this.navHistoryBack();
+	},
+
+	navHistoryBack: function() {
+		window.history.go(-1);
 	},
 
 	getEventBus: function() {
 		return sap.ui.getCore().getEventBus();
+	},
+
+	getModel: function() {
+		return sap.ui.getCore().getModel();
 	},
 
 	getRouter: function() {
@@ -115,35 +164,17 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 		this.getEventBus().unsubscribe("Master2", "LoadFinished", this.onMasterLoaded, this);
 	},
 
-	onNavToItemDetails: function(e) {
-		this.getRouter().myNavToWithoutHash({
-			currentView: this.getView(),
-			targetViewName: "com.broadspectrum.etime.mgr.view.Detail2",
-			targetViewType: "XML",
-			transition: "slide"
-		});
-		var b = e.getSource().getBindingContext().getPath();
-		var m = this.getView().getModel();
-		//the date is formatted to a string so we get it from the path and reformat since its easier and should be the same at this point		
-		var dateworked = b.split(",")[1];
-		dateworked = dateworked.replace(/%3A/g, ':');
-		dateworked = dateworked.split('=')[1];
-		this.getRouter().navTo("detail2", {
-			Epernr: this.oView.getBindingContext().getProperty("Epernr"),
-			// 			Dateworked: this.oView.getBindingContext().getProperty("Dateworked"),
-			Dateworked: dateworked,
-			Seqnr: m.getProperty(b).Seqnr
-		}, true);
+	onDetailListItemTap: function(oEvent) {
+		// Get the list item either from the listItem parameter or from the event's
+		// source itself (will depend on the device-dependent mode)
+		this.showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
+	},
 
-//         this.getRouter().navTo("detail2", {
-// 			from: "detail01",
-// 			entity: b
-// 		}, true);
-		//     		this.getRouter().myNavToWithoutHash({ 
-		//     			currentView : this.getView(),
-		//     			targetViewName : "com.broadspectrum.etime.mgr.view.Detail2",
-		//     			targetViewType : "XML",
-		//     			transition : "slide"
-		//     		});
+	showDetail: function(oItem) {
+		this.getRouter().navTo("approval", {
+			TeamViewEntity: this.oRoutingParams.TeamViewEntity,
+			EmployeeViewEntity: this.oRoutingParams.EmployeeViewEntity,
+			DetailViewEntity: oItem.getBindingContext().getPath().substr(1) // no slash in router param
+		});
 	}
 });

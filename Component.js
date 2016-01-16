@@ -1,5 +1,4 @@
 jQuery.sap.declare("com.broadspectrum.etime.mgr.Component");
-jQuery.sap.require("com.broadspectrum.etime.mgr.MyRouter");
 
 sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 	metadata: {
@@ -23,7 +22,7 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 
 		routing: {
 			config: {
-				routerClass: com.broadspectrum.etime.mgr.MyRouter,
+				routerClass: "sap.m.routing.Router",
 				viewType: "XML",
 				viewPath: "com.broadspectrum.etime.mgr.view",
 				clearTarget: false,
@@ -31,75 +30,77 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 			},
 			routes: [
 				{
+					name: "home",
 					pattern: "",
-					name: "main",
-					view: "Master",
-					viewLevel: 1,
-					targetAggregation: "masterPages",
-					targetControl: "idAppControl",
+					target: "home",
 					subroutes: [
 						{
-							pattern: "master2/{entity}",
-							name: "master2",
-							view: "Master2",
-							viewLevel: 2,
-							targetAggregation: "masterPages"
-						}
-		    		]
-				},
-				{
-					pattern: "master02/{entity}",
-					name: "master02",
-					view: "Master2",
-					viewLevel: 2,
-					targetAggregation: "masterPages",
-					subroutes: [
+							name: "welcome",
+							pattern: "welcome",
+							target: "welcome",
+							subroutes: [
+								{
+									name: "timesheets",
+									pattern: "{TeamViewEntity}/timesheets",
+									target: "timesheets",
+									subroutes: [
+										{
+											name: "detail",
+											pattern: "{TeamViewEntity}/timesheets/{EmployeeViewEntity}/detail",
+											target: "detail",
+											subroutes: [
+												{
+													name: "approval",
+													pattern: "{TeamViewEntity}/timesheets/{EmployeeViewEntity}/detail/{DetailViewEntity}/approval",
+													target: "approval"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
 						{
-							pattern: "master02/{entity}",
-							name: "detail",
-							view: "Detail",
-							viewLevel: 3,
-							targetAggregation: "detailPages"
-						}
-		    		]
+							pattern: "notfound",
+							name: "notfound",
+							target: "notfound"
+                        }
+                    ]
+                }
+			],
+			targets: {
+				home: {
+					viewName: "Master",
+					controlId: "idAppControl",
+					controlAggregation: "masterPages"
 				},
-				// {
-				//  	pattern: "Detail/{entity}",///{Epernr}/{Dateworked}/{Seqnr}",
-				//  	name: "detail01",
-				// 	view: "Detail",
-				// 	viewLevel: 3
-				// 	,
-				// 	subroutes: [
-				// 		{
-				// 			pattern: "Detail2/{entity}",
-				// 			name: "detail2",
-				// 			view: "Detail2",
-				// 			viewLevel: 3,
-				// 			targetAggregation: "detailPages"
-				// 		}
-		  //  		]
-				// }
-				{
-				    pattern: "DetailViewSet/{Epernr}/{Dateworked}/{Seqnr}",
-				 	name: "detail2",
-					view: "Detail2",
-					viewLevel: 3    
+				timesheets: {
+					viewName: "Master2",
+					controlId: "idAppControl",
+					controlAggregation: "masterPages"
 				},
-				{
-				    pattern: "DetailViewSet/{Epernr}/{Dateworked}",
-				 	name: "detail1",
-					view: "Detail",
-					viewLevel: 3    
-				}				
-		    ]
+				welcome: {
+					viewName: "Welcome",
+					controlId: "idAppControl",
+					controlAggregation: "detailPages"
+				},
+				detail: {
+					viewName: "Detail",
+					controlId: "idAppControl",
+					controlAggregation: "detailPages"
+				},
+				approval: {
+					viewName: "Detail2",
+					controlId: "idAppControl",
+					controlAggregation: "detailPages"
+				},
+				notfound: {
+					viewName: "NotFound",
+					controlId: "idAppControl",
+					controlAggregation: "detailPages"
+				}
+			}
 		}
-// 		detailPageRoutes: {
-// 			"detail2": {
-// 				"pattern": "DetailViewSet/{Epernr}/{Dateworked}/{Seqnr}",
-// 				"view": "Detail2",
-// 				"viewLevel": 1
-// 			}
-// 		}
 	},
 
 	init: function() {
@@ -127,11 +128,16 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 		}
 
 		// Create and set domain model to the component
-		var oModel = new sap.ui.model.odata.ODataModel(sServiceUrl, {
-			json: true,
-			loadMetadataAsync: true
-		});
+		// 		var oModel = new sap.ui.model.odata.ODataModel(sServiceUrl, {
+		// 			json: true,
+		// 			loadMetadataAsync: true
+		// 		});
+		var oModel = new sap.ui.model.odata.v2.ODataModel(sServiceUrl);
+		oModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+		oModel.setDefaultCountMode(sap.ui.model.odata.CountMode.None);
+		oModel.setRefreshAfterChange(true);
 		this.setModel(oModel);
+		sap.ui.getCore().setModel(oModel);
 
 		// Set device model
 		var oDeviceModel = new sap.ui.model.json.JSONModel({

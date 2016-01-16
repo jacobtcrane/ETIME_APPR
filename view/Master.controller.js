@@ -1,70 +1,50 @@
 sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master", {
 
-	onInit : function() {
-		this.oInitialLoadFinishedDeferred = jQuery.Deferred();
+	onInit: function() {
+		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+		this.getRouter().attachRoutePatternMatched(this.onRoutePatternMatched, this);
+		this.oRoutingParams = {};
+	},
 
-		var oEventBus = this.getEventBus();
-
-		this.getView().byId("master1List").attachEventOnce("updateFinished", function() {
-			this.oInitialLoadFinishedDeferred.resolve();
-			oEventBus.publish("Master", "InitialLoadFinished", { oListItem : this.getView().byId("master1List").getItems()[0] });
-    		this.getRouter().detachRoutePatternMatched(this.onRouteMatched, this);
-		}, this);
-
-		//On phone devices, there is nothing to select from the list. There is no need to attach events.
-		if (sap.ui.Device.system.phone) {
-			return;
+	onRouteMatched: function(oEvent) {
+		var oParameters = oEvent.getParameters();
+		if (oParameters.name === "home") {
+			// nothing to do here
 		}
-
-		this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-
-		oEventBus.subscribe("Master2", "NotFound", this.onNotFound, this);
 	},
 
-	onRouteMatched : function(oEvent) {
-		var sName = oEvent.getParameter("name");
-
-		if (sName !== "main") {
-			return;
+	onRoutePatternMatched: function(oEvent) {
+		var oParameters = oEvent.getParameters();
+		if (oParameters.name === "home") {
+			if (!sap.ui.Device.system.phone) {
+				// load the welcome page on non-phone devices (splitapp behaves like a
+				// single nav controller on phones, so the master list has to be shown first)
+				// note that this has to happen on the RoutePatternMatched event as this
+				// only traps a route actually being matched. 
+				// intermediate RouteMatched events (such as "home" being loaded as a parent
+				// route of "detail", are not trapped by this event)
+				this.getRouter().navTo("welcome");
+			}
 		}
-
-		//Load the master2 view in desktop
-		this.getRouter().myNavToWithoutHash({ 
-			currentView : this.getView(),
-			targetViewName : "com.broadspectrum.etime.mgr.view.Master2",
-			targetViewType : "XML"
-		});
-
-		//Load the welcome view in desktop
-		this.getRouter().myNavToWithoutHash({ 
-			currentView : this.getView(),
-			targetViewName : "com.broadspectrum.etime.mgr.view.Welcome",
-			targetViewType : "XML"
-		});
 	},
 
-
-	waitForInitialListLoading : function (fnToExecute) {
-		jQuery.when(this.oInitialLoadFinishedDeferred).then(jQuery.proxy(fnToExecute, this));
-	},
-
-	onNotFound : function () {
+	onNotFound: function() {
 		this.getView().byId("master1List").removeSelections();
 	},
 
-	onSearch : function() {
+	onSearch: function() {
 		// Add search filter
 		var filters = [];
 		var searchString = this.getView().byId("master1SearchField").getValue();
 		if (searchString && searchString.length > 0) {
-			filters = [ new sap.ui.model.Filter("", sap.ui.model.FilterOperator.Contains, searchString) ];
+			filters = [new sap.ui.model.Filter("", sap.ui.model.FilterOperator.Contains, searchString)];
 		}
 
 		// Update list binding
 		this.getView().byId("master1List").getBinding("items").filter(filters);
 	},
 
-	onSelect : function(oEvent) {
+	onSelect: function(oEvent) {
 		// Get the list item either from the listItem parameter or from the event's
 		// source itself (will depend on the device-dependent mode)
 		var oList = this.getView().byId("master1List");
@@ -72,24 +52,21 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master", {
 		oList.removeSelections();
 	},
 
-	showDetail : function(oItem) {
-		// If we're on a phone device, include nav in history
-		var bReplace = jQuery.device.is.phone ? false : true;
-		this.getRouter().navTo("master2", {
-			from: "main",
-			entity: oItem.getBindingContext().getPath().substr(1)
-		}, bReplace);
+	showDetail: function(oItem) {
+		this.getRouter().navTo("timesheets", {
+			TeamViewEntity: oItem.getBindingContext().getPath().substr(1) // no slash in router param
+		});
 	},
-	
-	getEventBus : function () {
+
+	getEventBus: function() {
 		return sap.ui.getCore().getEventBus();
 	},
 
-	getRouter : function () {
+	getRouter: function() {
 		return sap.ui.core.UIComponent.getRouterFor(this);
 	},
 
-	onExit : function(oEvent){
-	    this.getEventBus().unsubscribe("Master2", "NotFound", this.onNotFound, this);
+	onExit: function(oEvent) {
+		this.getEventBus().unsubscribe("Master2", "NotFound", this.onNotFound, this);
 	}
 });

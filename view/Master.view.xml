@@ -1,4 +1,3 @@
-
 <mvc:View
 	controllerName="com.broadspectrum.etime.mgr.view.Master"
 	displayBlock="true"
@@ -47,8 +46,6 @@
 			</List>
 		</content>
 		<footer>
-			<Toolbar>
-			</Toolbar>
 		</footer>
 	</Page>
 </mvc:View>

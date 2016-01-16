@@ -9,29 +9,30 @@
 			</Bar>
 		</subHeader>
 		<content>
-			<List growing="true" growingScrollToLoad="true" id="master2List" items="{EmployeeViewSet}" mode="{device]/listMode}" type="Navigation">
-				<CustomListItem tap="onSelect" type="Active">
-					<HBox>
-						<Switch class="switch" customTextOff=" " customTextOn="OK" state="{Isselected}"/>
-						<VBox class="listDouble">
-							<Text text="{Datetxt}"/>
-							<Text text="{Hourstxt}"/>
-						</VBox>
-						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
-							visible="{HasHda}"/>
-						<core:Icon class="listIcons" color="#000000" src="sap-icon://payment-approval"
-							visible="{HasAllowance}"/>
-						<core:Icon class="listIcons" color="#000000" src="sap-icon://comment"
-							visible="{HasComment}"/>
-					</HBox>
-				</CustomListItem>
+			<List id="master2List" items="{EmployeeViewSet}" 
+			    growing="true" growingScrollToLoad="true">
+				<items>
+    				<CustomListItem tap="onMaster2ListItemTap" type="Active">
+    					<HBox>
+    						<VBox class="listDouble">
+    							<Text text="{Datetxt}"/>
+    							<Text text="{Hourstxt}"/>
+    						</VBox>
+    						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
+    							visible="{HasHda}"/>
+    						<core:Icon class="listIcons" color="#000000" src="sap-icon://payment-approval"
+    							visible="{HasAllowance}"/>
+    						<core:Icon class="listIcons" color="#000000" src="sap-icon://comment"
+    							visible="{HasComment}"/>
+    					</HBox>
+    				</CustomListItem>
+				</items>
 			</List>
 		</content>
 		<footer>
-			<Toolbar>
+			<Toolbar id="toolbar" visible="{device>/isPhone}">
 				<ToolbarSpacer/>
-				<Button text="Select All" type="Default" press="onSelectAll"></Button>
-				<Button text='Approve' type="Accept" press="onApproveSelected"/>
+				<Button id="submitButton" text='Submit' type="Emphasized" press="onSubmitPressed" enabled="false" />
 			</Toolbar>
 		</footer>
 	</Page>

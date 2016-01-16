@@ -1,36 +1,39 @@
 <mvc:View controllerName="com.broadspectrum.etime.mgr.view.Detail" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="{device]/isPhone}" title="{Ename}">
+	<Page id="detailPage" title="{Ename}" navButtonPress="onNavBack" showNavButton="{device>/isPhone}">
 		<content>
 			<ObjectHeader condensed="true" title="{Hourstxt}">
 				<attributes>
 					<ObjectAttribute text="{Datetxt}"/>
 				</attributes>
 			</ObjectHeader>
-			<List id="DetailList" items="{DetailViewSet}" type="Navigation">
-				<CustomListItem tap="onNavToItemDetails" type="Active">
-					<HBox>
-						<Switch class="switch" customTextOff=" " customTextOn="OK" state="{Isselected}"/>
-						<VBox class="listDouble">
-							<Text text="{Timetxt}"/>
-							<Text text="{Atttxt}"/>
-							<Text text="{Costtxt}"/>
-						</VBox>
-						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
-							visible="{parts : [{path : 'HasHda'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
-						<core:Icon class="listIcons" color="#000000" src="sap-icon://payment-approval"
-							visible="{parts : [{path : 'HasAllowance'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
-						<core:Icon class="listIcons" color="#000000" src="sap-icon://comment"
-							visible="{parts : [{path : 'HasComment'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
-					</HBox>
-				</CustomListItem>
+			<List id="detailList" items="{DetailViewSet}">
+				<items>
+    				<CustomListItem tap="onDetailListItemTap" type="Navigation">
+    					<HBox>
+    						<Switch change="onSwitchChanged" state="{path:'Status',formatter: '.getSwitchStateForStatus'}"
+    						    type="AcceptReject" />
+    						<VBox class="listDouble">
+    							<Text text="{Timetxt}"/>
+    							<Text text="{Atttxt}"/>
+    							<Text text="{Costtxt}"/>
+    						</VBox>
+    						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
+    							visible="{parts : [{path : 'HasHda'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+    						<core:Icon class="listIcons" color="#000000" src="sap-icon://payment-approval"
+    							visible="{parts : [{path : 'HasAllowance'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+    						<core:Icon class="listIcons" color="#000000" src="sap-icon://comment"
+    							visible="{parts : [{path : 'HasComment'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
+    					</HBox>
+    				</CustomListItem>
+				</items>
 			</List>
 		</content>
 		<footer>
-			<Toolbar>
+			<Toolbar id="toolbar">
 				<ToolbarSpacer/>
-				<Button text="Select All" type="Default"></Button>
-				<Button text='Approve' type="Accept"/>
+				<Button text="Select All" type="Default" press="onSelectAllPressed" />
+				<Button id="submitButton" text='Submit' type="Emphasized" press="onSubmitPressed" enabled="false" />
 			</Toolbar>
 		</footer>
 	</Page>

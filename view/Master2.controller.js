@@ -1,54 +1,24 @@
+jQuery.sap.require("com.broadspectrum.etime.mgr.util.Dialogs");
+jQuery.sap.require("sap.m.MessageBox");
+
 sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 
 	onInit: function() {
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
-
-		//On phone devices, there is nothing to select from the list. There is no need to attach events.
-		if (!sap.ui.Device.system.phone) {
-			this.getRouter().attachRoutePatternMatched(this.onRoutePatternMatched, this);
-		}
-	},
-
-	onRoutePatternMatched: function(oEvent) {
-		var sName = oEvent.getParameter("name");
-		//JCRANE - Added detail as this seems to fix the desktop navigation
-		if (sName !== "master2" && sName !== "detail") {
-			return;
-		}
-
-		//		Load the detail view in desktop
-		this.getRouter().myNavToWithoutHash({
-			currentView: this.getView(),
-			targetViewName: "com.broadspectrum.etime.mgr.view.Detail",
-			targetViewType: "XML",
-			transition: "slide"
-		});
+		this.oRoutingParams = {};
 	},
 
 	onRouteMatched: function(oEvent) {
 		var oParameters = oEvent.getParameters();
-
-		if (oParameters.name === "master2") {
-			var sEntityPath = "/" + oParameters.arguments.entity;
-			this.bindView(sEntityPath);
-
-			var oEventBus = this.getEventBus();
-			var that = this;
-			this.byId("master2List").attachUpdateFinished(function() {
-				that.selectFirstItem();
-				oEventBus.publish("Master2", "LoadFinished", {
-					oListItem: that.getView().byId("master2List").getItems()[0]
-				});
-			});
-		}
-
-		if (oParameters.name === "master02" && jQuery.device.is.phone) {
-			this.getRouter().myNavToWithoutHash({
-				currentView: this.getView(),
-				targetViewName: "com.broadspectrum.etime.mgr.view.Detail",
-				targetViewType: "XML",
-				transition: "slide"
-			});
+		if (oParameters.name === "timesheets") {
+			if (oParameters.arguments.TeamViewEntity) {
+				this.oRoutingParams.TeamViewEntity = oParameters.arguments.TeamViewEntity;
+			} else {
+				this.getRouter().navTo("notfound", {}, true); // don't create a history entry
+				return;
+			}
+			this.bindView("/" + this.oRoutingParams.TeamViewEntity);
+			this.checkSubmitButtonEnabled();
 		}
 	},
 
@@ -70,29 +40,50 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		}
 	},
 
-	selectFirstItem: function() {
-		var oList = this.getView().byId("master2List");
-		var aItems = oList.getItems();
-		if (aItems.length) {
-			oList.setSelectedItem(aItems[0], true);
-		}
-	},
-
 	showEmptyView: function() {
-		this.getRouter().myNavToWithoutHash({
-			currentView: this.getView(),
-			targetViewName: "com.broadspectrum.etime.mgr.view.NotFound",
-			targetViewType: "XML"
-		});
+		this.getRouter().navTo("notfound", {}, true); // don't create a history entry
 	},
 
 	fireDetailNotFound: function() {
 		this.getEventBus().publish("Master2", "NotFound");
 	},
 
+	checkSubmitButtonEnabled: function() {
+		if (this.getModel().hasPendingChanges()) {
+			this.byId("submitButton").setEnabled(true);
+		} else {
+			this.byId("submitButton").setEnabled(false);
+		}
+	},
+
 	onNavBack: function() {
-		// This is only relevant when running on phone devices
-		this.getRouter().myNavBack("main");
+		var oModel = this.getModel();
+		if (oModel.hasPendingChanges()) {
+			sap.m.MessageBox.show("Exit without submitting approvals?", {
+				icon: sap.m.MessageBox.Icon.WARNING,
+				title: "Unsubmitted Approvals",
+				actions: [sap.m.MessageBox.Action.CANCEL, sap.m.MessageBox.Action.OK],
+				onClose: $.proxy(function(oAction) {
+					if (oAction === sap.m.MessageBox.Action.OK) {
+						oModel.resetChanges();
+						this.navHistoryBack();
+					}
+				}, this)
+			});
+		} else {
+			this.navHistoryBack();
+		}
+	},
+
+	navHistoryBack: function() {
+		if (sap.ui.Device.system.phone) {
+			// splitapp behaves like a single nav controller on phones, so navigating
+			// to a new route makes the transition slide in the wrong direction, whereas
+			// with a single nav controller we really just want to go back...
+			window.history.go(-1);
+		} else {
+			this.getRouter().navTo("home");
+		}
 	},
 
 	onSearch: function() {
@@ -107,93 +98,60 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		this.getView().byId("master2List").getBinding("items").filter(filters);
 	},
 
-	onSelect: function(oEvent) {
+	onMaster2ListItemTap: function(oEvent) {
 		// Get the list item either from the listItem parameter or from the event's
 		// source itself (will depend on the device-dependent mode)
 		this.showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
 	},
 
 	showDetail: function(oItem) {
-		// If we're on a phone device, include nav in history
-		var bReplace = jQuery.device.is.phone ? false : true;
 		this.getRouter().navTo("detail", {
-			from: "master",
-			entity: oItem.getBindingContext().getPath().substr(1)
-		}, bReplace);
+			TeamViewEntity: this.oRoutingParams.TeamViewEntity,
+			EmployeeViewEntity: oItem.getBindingContext().getPath().substr(1) // no slash in router param
+		});
+	},
+
+	onSubmitPressed: function(oEvent) {
+		var oModel = this.getModel();
+		// remove all current messages from message manager
+		sap.ui.getCore().getMessageManager().removeAllMessages();
+
+		// note that we have to specify this submission is only for deferred batch group "detailChanges"
+		// otherwise all service calls get batched together and the success/error outcome is clouded
+		oModel.submitChanges({
+			success: $.proxy(function() {
+				// TODO: until we can figure out why batching doesn't work, check for messages
+				if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
+					// show odata errors in message popover
+					this.showMessagePopover(this.byId("toolbar"));
+				} else {
+					// raise a toast to the user!
+					this.navHistoryBack();
+					sap.m.MessageToast.show("Approvals submitted");
+				}
+			}, this),
+			error: $.proxy(function() {
+				// show odata errors in message popover
+				this.showMessagePopover(this.byId("toolbar"));
+				var msg = 'Approvals submit encountered errors! Pleae review and retry.';
+				sap.m.MessageToast.show(msg);
+			}, this)
+		});
+	},
+
+	showMessagePopover: function(oOpenBy) {
+		com.broadspectrum.etime.mgr.util.Dialogs.getMessagePopover(this).openBy(oOpenBy || this.getView());
 	},
 
 	getEventBus: function() {
 		return sap.ui.getCore().getEventBus();
 	},
 
+	getModel: function() {
+		return sap.ui.getCore().getModel();
+	},
+
 	getRouter: function() {
 		return sap.ui.core.UIComponent.getRouterFor(this);
-	},
-	
-	onSelectAll: function() {
-	    
-	    var bView = this.getView();
-	    var bModel = bView.getModel();
-	    var bData = bModel.oData;
-	    var dstring = bData.toString();
-	    var oArray = $.map(bData, function(value,index){
-	        return [value];
-	    });
-
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-	    
-var arr =[];	    
-	for( var i in bData ) {
-    if (bData.hasOwnProperty(i)){
-        if (isNumber(i)){
-            arr[i] = bData[i];
-        }else{
-          arr.push(bData[i]);
-        }
-    }
-} 
-	    
-
-	    var dstring = bData.toString();
-	    var oArray = $.map(bData, function(value,index){
-	        return [value];
-	    });
-
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-	    
-var arr =[];	    
-	for( var i in bData ) {
-    if (bData.hasOwnProperty(i)){
-        if (isNumber(i)){
-            arr[i] = bData[i];
-        }else{
-          arr.push(bData[i]);
-        }
-    }
-} 
-	    
-	    var i;
-	    var j = bData.length;
-	    for (i=0; i<j; i++ ) {
-
-	        if (bData[i].indexOf("EmployeeViewSet") > -1 ){
-	//Set Isselected to X           
-	
-	        }
-	    }
-	   // alert("Select All Code Fired");
-	   // var selected = this.oModel.getProperty(this.oCreatedEntityContext.getPath() + "/Isselected");
-	   // if (selected !== "X") {
-	   //     this.oModel.setProperty(this.oCreatedEntityContext.getPath() + "/Isselected","X");
-	   // }
-	},
-	
-	onApproveSelected: function() {
-	   alert("Approved Code Fired");
 	}
-
 });
