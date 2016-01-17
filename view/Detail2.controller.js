@@ -111,7 +111,26 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 					path = sContextPath + '/Mnote';
 					oModel.setProperty(path, rejectionNote);
 					dialog.close();
-					this.navHistoryBack();
+					oModel.submitChanges({
+						success: $.proxy(function() {
+							// TODO: until we can figure out why batching doesn't work, check for messages
+							if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
+								// show odata errors in message popover
+								this.showMessagePopover(this.byId("toolbar"));
+							} else {
+								// raise a toast to the user!
+								this.navHistoryBack();
+								sap.m.MessageToast.show("Rejection submitted");
+							}
+						}, this),
+						error: $.proxy(function() {
+							// show odata errors in message popover
+							this.showMessagePopover(this.byId("toolbar"));
+							var msg = 'Rejection submit encountered errors! Pleae review and retry.';
+							sap.m.MessageToast.show(msg);
+						}, this)
+					});
+					// 	this.navHistoryBack();
 				}, this)
 			}),
 			endButton: new sap.m.Button({
@@ -135,7 +154,26 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 		oModel.setProperty(path, 'APP');
 		path = sContextPath + '/Statustxt';
 		oModel.setProperty(path, 'Approved');
-		this.navHistoryBack();
+		oModel.submitChanges({
+			success: $.proxy(function() {
+				// TODO: until we can figure out why batching doesn't work, check for messages
+				if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
+					// show odata errors in message popover
+					this.showMessagePopover(this.byId("toolbar"));
+				} else {
+					// raise a toast to the user!
+					this.navHistoryBack();
+					sap.m.MessageToast.show("Approvals submitted");
+				}
+			}, this),
+			error: $.proxy(function() {
+				// show odata errors in message popover
+				this.showMessagePopover(this.byId("toolbar"));
+				var msg = 'Approvals submit encountered errors! Pleae review and retry.';
+				sap.m.MessageToast.show(msg);
+			}, this)
+		});
+		// 		this.navHistoryBack();
 	}
 
 });
