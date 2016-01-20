@@ -3,7 +3,7 @@
   "css/style.css": "1452739483000",
   "dialogs/MessagePopover.fragment.xml": "1452571105000",
   "i18n/messageBundle.properties": "1452739483000",
-  "index.html": "1453328289000",
+  "index.html": "1453329227000",
   "mock_preview_sapui5.html": "1452739483000",
   "model/DetailViewSet.json": "1452739483000",
   "model/EmployeeViewSet.json": "1452739483000",
@@ -25,5 +25,6 @@
   "view/NotFound.controller.js": "1452739483000",
   "view/NotFound.view.xml": "1453328289000",
   "view/Welcome.controller.js": "1452932008000",
-  "view/Welcome.view.xml": "1452932001000"
+  "view/Welcome.view.xml": "1452932001000",
+  "images/approvals.png": "1453329188000"
 }
