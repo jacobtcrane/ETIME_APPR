@@ -1,6 +1,15 @@
 jQuery.sap.declare("com.broadspectrum.etime.mgr.Component");
 
 sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
+    		createContent : function(){
+		    this.view = sap.ui.view({
+		        id:'App',
+		        viewName: 'com.broadspectrum.etime.mgr.view.App',
+		        type : sap.ui.core.mvc.ViewType.XML, 
+		        viewData : { component : this }  
+		    });
+		    return this.view;  
+		},
 	metadata: {
 		name: "TDG Demo App",
 		version: "1.0",
