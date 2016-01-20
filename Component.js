@@ -11,7 +11,7 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 		    return this.view;  
 		},
 	metadata: {
-		name: "TDG Demo App",
+		name: "My Timesheets Approval App",
 		version: "1.0",
 		includes: [],
 		dependencies: {
