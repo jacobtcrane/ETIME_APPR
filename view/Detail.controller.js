@@ -7,6 +7,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 	onInit: function() {
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 		this.oRoutingParams = {};
+		var oEventBus = this.getEventBus();
+		oEventBus.subscribe("DetailViewSet2", "Changed", this.onDetailChanged, this);
 	},
 
 	onRouteMatched: function(oEvent) {
@@ -25,7 +27,12 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 		}
 	},
 
+	onDetailChanged: function(sChanel, sEvent, oData) {
+		this.bindView(this.keyForView);
+	},
+
 	bindView: function(sEntityPath) {
+		this.keyForView = sEntityPath;
 		var oView = this.getView();
 		oView.bindElement(sEntityPath);
 

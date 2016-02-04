@@ -35,13 +35,13 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 	},
 
 	fireDetailChanged: function(sEntityPath) {
-		this.getEventBus().publish("DetailViewSet", "Changed", {
+		this.getEventBus().publish("DetailViewSet2", "Changed", {
 			sEntityPath: sEntityPath
 		});
 	},
 
 	fireDetailNotFound: function() {
-		this.getEventBus().publish("DetailViewSet", "NotFound");
+		this.getEventBus().publish("DetailViewSet2", "NotFound");
 	},
 
 	getHeaderStatusState: function(Status) {
@@ -120,6 +120,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 							} else {
 								// raise a toast to the user!
 								this.navHistoryBack();
+								this.fireDetailChanged();
 								sap.m.MessageToast.show("Rejection submitted");
 							}
 						}, this),
@@ -163,6 +164,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 				} else {
 					// raise a toast to the user!
 					this.navHistoryBack();
+					this.fireDetailChanged();
 					sap.m.MessageToast.show("Approvals submitted");
 				}
 			}, this),

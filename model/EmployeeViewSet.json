@@ -1,19 +1,241 @@
 [{
-	"Epernr": "00000002",
-	"Dateworked": "/Date(1449525600000)/",
-	"Ename": "Frikkie",
-	"Datetxt": "Dec 8",
-	"Hourstxt": "4",
-	"HasComment": "false",
-	"HasHda": "false",
-	"HasAllowance": "false"
+	"Epernr": "Epernr 1",
+	"Dateworked": "/Date(1334313503000)/",
+	"Ename": "Ename 1",
+	"Datetxt": "Datetxt 1",
+	"Hourstxt": "Hourstxt 1",
+	"HasComment": true,
+	"HasHda": false,
+	"HasAllowance": true,
+	"Isselected": false,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 1',Dateworked=datetime'2012-04-13T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 1',Dateworked=datetime'2012-04-13T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 1',Dateworked=datetime'2012-04-13T10:38:23')/DetailViewSet"
+		}
+	}
 }, {
-	"Epernr": "00000003",
-	"Dateworked": "/Date(1448920800000)/",
-	"Ename": "Kosie",
-	"Datetxt": "Dec 1",
-	"Hourstxt": "3",
-	"HasComment": "true",
-	"HasHda": "false",
-	"HasAllowance": "true"
+	"Epernr": "Epernr 2",
+	"Dateworked": "/Date(1574851103000)/",
+	"Ename": "Ename 2",
+	"Datetxt": "Datetxt 2",
+	"Hourstxt": "Hourstxt 2",
+	"HasComment": false,
+	"HasHda": true,
+	"HasAllowance": true,
+	"Isselected": false,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 2',Dateworked=datetime'2019-11-27T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 2',Dateworked=datetime'2019-11-27T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 2',Dateworked=datetime'2019-11-27T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 3",
+	"Dateworked": "/Date(1369737503000)/",
+	"Ename": "Ename 3",
+	"Datetxt": "Datetxt 3",
+	"Hourstxt": "Hourstxt 3",
+	"HasComment": true,
+	"HasHda": false,
+	"HasAllowance": false,
+	"Isselected": false,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 3',Dateworked=datetime'2013-05-28T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 3',Dateworked=datetime'2013-05-28T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 3',Dateworked=datetime'2013-05-28T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 4",
+	"Dateworked": "/Date(969791903000)/",
+	"Ename": "Ename 4",
+	"Datetxt": "Datetxt 4",
+	"Hourstxt": "Hourstxt 4",
+	"HasComment": true,
+	"HasHda": false,
+	"HasAllowance": false,
+	"Isselected": false,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 4',Dateworked=datetime'2000-09-24T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 4',Dateworked=datetime'2000-09-24T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 4',Dateworked=datetime'2000-09-24T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 5",
+	"Dateworked": "/Date(1103193503000)/",
+	"Ename": "Ename 5",
+	"Datetxt": "Datetxt 5",
+	"Hourstxt": "Hourstxt 5",
+	"HasComment": false,
+	"HasHda": false,
+	"HasAllowance": false,
+	"Isselected": true,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 5',Dateworked=datetime'2004-12-16T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 5',Dateworked=datetime'2004-12-16T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 5',Dateworked=datetime'2004-12-16T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 6",
+	"Dateworked": "/Date(1573036703000)/",
+	"Ename": "Ename 6",
+	"Datetxt": "Datetxt 6",
+	"Hourstxt": "Hourstxt 6",
+	"HasComment": true,
+	"HasHda": true,
+	"HasAllowance": true,
+	"Isselected": true,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 6',Dateworked=datetime'2019-11-06T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 6',Dateworked=datetime'2019-11-06T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 6',Dateworked=datetime'2019-11-06T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 7",
+	"Dateworked": "/Date(967113503000)/",
+	"Ename": "Ename 7",
+	"Datetxt": "Datetxt 7",
+	"Hourstxt": "Hourstxt 7",
+	"HasComment": true,
+	"HasHda": false,
+	"HasAllowance": false,
+	"Isselected": true,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 7',Dateworked=datetime'2000-08-24T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 7',Dateworked=datetime'2000-08-24T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 7',Dateworked=datetime'2000-08-24T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 8",
+	"Dateworked": "/Date(1224239903000)/",
+	"Ename": "Ename 8",
+	"Datetxt": "Datetxt 8",
+	"Hourstxt": "Hourstxt 8",
+	"HasComment": false,
+	"HasHda": true,
+	"HasAllowance": true,
+	"Isselected": true,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 8',Dateworked=datetime'2008-10-17T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 8',Dateworked=datetime'2008-10-17T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 8',Dateworked=datetime'2008-10-17T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 9",
+	"Dateworked": "/Date(1155897503000)/",
+	"Ename": "Ename 9",
+	"Datetxt": "Datetxt 9",
+	"Hourstxt": "Hourstxt 9",
+	"HasComment": false,
+	"HasHda": false,
+	"HasAllowance": true,
+	"Isselected": true,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 9',Dateworked=datetime'2006-08-18T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 9',Dateworked=datetime'2006-08-18T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 9',Dateworked=datetime'2006-08-18T10:38:23')/DetailViewSet"
+		}
+	}
+}, {
+	"Epernr": "Epernr 10",
+	"Dateworked": "/Date(1075027103000)/",
+	"Ename": "Ename 10",
+	"Datetxt": "Datetxt 10",
+	"Hourstxt": "Hourstxt 10",
+	"HasComment": true,
+	"HasHda": true,
+	"HasAllowance": false,
+	"Isselected": true,
+	"__metadata": {
+		"uri": "EmployeeViewSet(Epernr='Epernr 10',Dateworked=datetime'2004-01-25T10:38:23')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.EmployeeView"
+	},
+	"TeamView": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 10',Dateworked=datetime'2004-01-25T10:38:23')/TeamView"
+		}
+	},
+	"DetailViewSet": {
+		"__deferred": {
+			"uri": "EmployeeViewSet(Epernr='Epernr 10',Dateworked=datetime'2004-01-25T10:38:23')/DetailViewSet"
+		}
+	}
 }]

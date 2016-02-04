@@ -1,13 +1,151 @@
 [{
-	"Mpernr": "00000001",
-	"Epernr": "00000002",
-	"Ename": "Frikkie",
-	"Epos": "Director",
-	"Hourstxt": "4"
+	"Mpernr": "Mpernr 1",
+	"Epernr": "Epernr 1",
+	"Ename": "Ename 1",
+	"Epos": "Epos 1",
+	"Hourstxt": "Hourstxt 1",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 1')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 1')/EmployeeViewSet"
+		}
+	}
 }, {
-	"Mpernr": "00000001",
-	"Epernr": "00000003",
-	"Ename": "Kosie",
-	"Epos": "Manager",
-	"Hourstxt": "3"
+	"Mpernr": "Mpernr 2",
+	"Epernr": "Epernr 2",
+	"Ename": "Ename 2",
+	"Epos": "Epos 2",
+	"Hourstxt": "Hourstxt 2",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 2')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 2')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 3",
+	"Epernr": "Epernr 3",
+	"Ename": "Ename 3",
+	"Epos": "Epos 3",
+	"Hourstxt": "Hourstxt 3",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 3')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 3')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 4",
+	"Epernr": "Epernr 4",
+	"Ename": "Ename 4",
+	"Epos": "Epos 4",
+	"Hourstxt": "Hourstxt 4",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 4')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 4')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 5",
+	"Epernr": "Epernr 5",
+	"Ename": "Ename 5",
+	"Epos": "Epos 5",
+	"Hourstxt": "Hourstxt 5",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 5')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 5')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 6",
+	"Epernr": "Epernr 6",
+	"Ename": "Ename 6",
+	"Epos": "Epos 6",
+	"Hourstxt": "Hourstxt 6",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 6')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 6')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 7",
+	"Epernr": "Epernr 7",
+	"Ename": "Ename 7",
+	"Epos": "Epos 7",
+	"Hourstxt": "Hourstxt 7",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 7')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 7')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 8",
+	"Epernr": "Epernr 8",
+	"Ename": "Ename 8",
+	"Epos": "Epos 8",
+	"Hourstxt": "Hourstxt 8",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 8')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 8')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 9",
+	"Epernr": "Epernr 9",
+	"Ename": "Ename 9",
+	"Epos": "Epos 9",
+	"Hourstxt": "Hourstxt 9",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 9')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 9')/EmployeeViewSet"
+		}
+	}
+}, {
+	"Mpernr": "Mpernr 10",
+	"Epernr": "Epernr 10",
+	"Ename": "Ename 10",
+	"Epos": "Epos 10",
+	"Hourstxt": "Hourstxt 10",
+	"__metadata": {
+		"uri": "TeamViewSet('Epernr 10')",
+		"type": "ZHTR_ETIME_MANAGER_SRV.TeamView"
+	},
+	"EmployeeViewSet": {
+		"__deferred": {
+			"uri": "TeamViewSet('Epernr 10')/EmployeeViewSet"
+		}
+	}
 }]
