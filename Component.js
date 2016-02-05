@@ -3,7 +3,7 @@ jQuery.sap.declare("com.broadspectrum.etime.mgr.Component");
 sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
     		createContent : function(){
 		    this.view = sap.ui.view({
-		        id:'App',
+		        id:'ZHTR_ETIME_MGR',
 		        viewName: 'com.broadspectrum.etime.mgr.view.App',
 		        type : sap.ui.core.mvc.ViewType.XML, 
 		        viewData : { component : this }  

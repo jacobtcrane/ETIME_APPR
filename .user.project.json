@@ -1,27 +1,6 @@
 {
   "run": [
     {
-      "filePath": "/ETIME_APPR/Component.js",
-      "previewMode": 0,
-      "dataMode": 1,
-      "workspace": "withoutWorkspace",
-      "ui5ActiveVersion": null,
-      "ui5VerSource": null,
-      "isDefaultVersion": 0,
-      "urlParameters": [],
-      "backendSystem": [
-        {
-          "source": "NMD",
-          "destinations": "TSL"
-        }
-      ],
-      "_metadata": {
-        "id": 8991134,
-        "runnerId": "fiorirunner",
-        "displayName": "TSL"
-      }
-    },
-    {
       "filePath": "/ETIME_APPR/index.html",
       "previewMode": 1,
       "dataMode": 1,
@@ -45,6 +24,27 @@
         "id": 6841366,
         "runnerId": "webapprunner",
         "displayName": "Manager Approvals (sap-ui-debug=true)"
+      }
+    },
+    {
+      "filePath": "/ETIME_APPR/Component.js",
+      "previewMode": 0,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "backendSystem": [
+        {
+          "source": "NMD",
+          "destinations": "TSL"
+        }
+      ],
+      "_metadata": {
+        "id": 8991134,
+        "runnerId": "fiorirunner",
+        "displayName": "TSL"
       }
     },
     {
