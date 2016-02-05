@@ -13,7 +13,7 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 	metadata: {
 		name: "My Timesheets Approval App",
 		version: "1.0",
-		includes: [],
+		includes: ['css/style.css'],
 		dependencies: {
 			libs: ["sap.m", "sap.ui.layout"],
 			components: []
