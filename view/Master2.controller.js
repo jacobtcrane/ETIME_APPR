@@ -6,6 +6,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 	onInit: function() {
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 		this.oRoutingParams = {};
+		var oEventBus = this.getEventBus();
+		oEventBus.subscribe("DetailViewSet1", "Changed", this.onDetailChanged, this);
 	},
 
 	onRouteMatched: function(oEvent) {
@@ -22,9 +24,56 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		}
 	},
 
+	onDetailChanged: function(sChanel, sEvent, oData) {
+		this.bindView(this.keyForView);
+		// var oModel = this.getView().getModel();
+		// oModel.read(this.keyForView, null, null, true, function(data) {
+		// 									console.log('successfully read master2 data');
+		// 								}, function() {
+		// 									console.log('error with reading of master2 data');
+		// 								});
+	},
+
 	bindView: function(sEntityPath) {
+		this.keyForView = sEntityPath;
 		var oView = this.getView();
-		oView.bindElement(sEntityPath);
+
+		var vBox = new sap.m.VBox();
+		vBox.addItem(new sap.m.Text({
+			text: "{Datetxt}"
+		}));
+		vBox.addItem(new sap.m.Text({
+			text: "{Hourstxt}"
+		}));
+		var oIconPerson = new sap.ui.core.Icon({
+			color: "#000000",
+			src: "sap-icon://person-placeholder",
+			visible: "{HasHda}"
+		});
+		var oIconPayment = new sap.ui.core.Icon({
+			color: "#000000",
+			src: "sap-icon://payment-approval",
+			visible: "{HasAllowance}"
+		});
+		var oIconComment = new sap.ui.core.Icon({
+			color: "#000000",
+			src: "sap-icon://comment",
+			visible: "{HasComment}"
+		});
+		var hBox = new sap.m.HBox();
+		hBox.addItem(vBox);
+		hBox.addItem(oIconPerson);
+		hBox.addItem(oIconPayment);
+		hBox.addItem(oIconComment);
+		var oList = this.getView().byId("master2List");
+		var oTemplate = new sap.m.CustomListItem({
+			tap: "onMaster2ListItemTap",
+			type: "Active",
+			attributes: [hBox]
+		});
+
+		oList.bindItems(this.keyForView, oTemplate, null, null);
+		// oView.bindElement(sEntityPath);
 
 		//Check if the data is already on the client
 		if (!oView.getModel().getData(sEntityPath)) {

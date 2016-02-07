@@ -29,6 +29,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 
 	onDetailChanged: function(sChanel, sEvent, oData) {
 		this.bindView(this.keyForView);
+		this.fireDetailChanged("");
 	},
 
 	bindView: function(sEntityPath) {
@@ -56,9 +57,11 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 	},
 
 	fireDetailChanged: function(sEntityPath) {
-		this.getEventBus().publish("Detail", "Changed", {
-			sEntityPath: sEntityPath
-		});
+		this.getEventBus().publish("DetailViewSet1", "Changed");
+
+		// this.getEventBus().publish("Detail", "Changed", {
+		// 	sEntityPath: sEntityPath
+		// });
 	},
 
 	fireDetailNotFound: function() {

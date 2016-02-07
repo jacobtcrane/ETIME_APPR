@@ -84,18 +84,19 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 			title: 'Reject',
 			type: 'Message',
 			content: [
-					new sap.m.Text({
+				new sap.m.Text({
 					text: 'Are you sure you want to reject this entry?'
 				}),
-					new sap.m.TextArea('rejectDialogTextarea', {
+				new sap.m.TextArea('rejectDialogTextarea', {
 					width: '100%',
 					placeholder: 'Add note (required)'
 				})
-				],
+			],
 			beginButton: new sap.m.Button({
 				type: 'Reject',
 				text: 'Reject',
 				press: $.proxy(function() {
+					this.getView().setBusy(true);
 					var rejectionNote = sap.ui.getCore().byId('rejectDialogTextarea').getValue();
 					if (!rejectionNote) {
 						dialog.close();
@@ -114,19 +115,22 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 					oModel.submitChanges({
 						success: $.proxy(function() {
 							// TODO: until we can figure out why batching doesn't work, check for messages
-							if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
-								// show odata errors in message popover
-								this.showMessagePopover(this.byId("toolbar"));
-							} else {
+							this.getView().setBusy(false);
+							//DJ: What's the point of this commented-out code? showMessagePopover doesn't even exist in this js
+							// if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
+							// 	// show odata errors in message popover
+							// 	this.showMessagePopover(this.byId("toolbar"));
+							// } else {
 								// raise a toast to the user!
 								this.navHistoryBack();
 								this.fireDetailChanged();
 								sap.m.MessageToast.show("Rejection submitted");
-							}
+							// }
 						}, this),
 						error: $.proxy(function() {
 							// show odata errors in message popover
-							this.showMessagePopover(this.byId("toolbar"));
+							// this.showMessagePopover(this.byId("toolbar"));
+							this.getView().setBusy(false);
 							var msg = 'Rejection submit encountered errors! Pleae review and retry.';
 							sap.m.MessageToast.show(msg);
 						}, this)
@@ -148,6 +152,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 		dialog.open();
 	},
 	onApprove: function() {
+		this.getView().setBusy(true);
 		var oModel = this.getModel();
 		// mark changes in the model; we'll submit them on the timesheet detail page
 		var sContextPath = this.getView().getBindingContext().getPath();
@@ -157,20 +162,24 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 		oModel.setProperty(path, 'Approved');
 		oModel.submitChanges({
 			success: $.proxy(function() {
+				this.getView().setBusy(false);
+				//DJ: What's the point of this commented-out code? showMessagePopover doesn't even exist in this js
 				// TODO: until we can figure out why batching doesn't work, check for messages
-				if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
-					// show odata errors in message popover
-					this.showMessagePopover(this.byId("toolbar"));
-				} else {
+				// if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
+				// 	// show odata errors in message popover
+				// 	this.showMessagePopover(this.byId("toolbar"));
+				// } else {
 					// raise a toast to the user!
 					this.navHistoryBack();
 					this.fireDetailChanged();
 					sap.m.MessageToast.show("Approvals submitted");
-				}
+				// }
+
 			}, this),
 			error: $.proxy(function() {
+				this.getView().setBusy(false);
 				// show odata errors in message popover
-				this.showMessagePopover(this.byId("toolbar"));
+				// this.showMessagePopover(this.byId("toolbar"));
 				var msg = 'Approvals submit encountered errors! Pleae review and retry.';
 				sap.m.MessageToast.show(msg);
 			}, this)
