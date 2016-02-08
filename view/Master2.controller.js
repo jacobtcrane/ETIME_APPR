@@ -8,79 +8,46 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		this.oRoutingParams = {};
 		var oEventBus = this.getEventBus();
 		oEventBus.subscribe("DetailViewSet1", "Changed", this.onDetailChanged, this);
+		this.dontRefreshMaster2 = false;
 	},
 
 	onRouteMatched: function(oEvent) {
-		var oParameters = oEvent.getParameters();
-		if (oParameters.name === "timesheets") {
-			if (oParameters.arguments.TeamViewEntity) {
-				this.oRoutingParams.TeamViewEntity = oParameters.arguments.TeamViewEntity;
-			} else {
-				this.getRouter().navTo("notfound", {}, true); // don't create a history entry
-				return;
+		if (!this.dontRefreshMaster2) {
+			var oParameters = oEvent.getParameters();
+			if (oParameters.name === "timesheets") {
+				if (oParameters.arguments.TeamViewEntity) {
+					this.oRoutingParams.TeamViewEntity = oParameters.arguments.TeamViewEntity;
+				} else {
+					this.getRouter().navTo("notfound", {}, true); // don't create a history entry
+					return;
+				}
+				this.bindView("/" + this.oRoutingParams.TeamViewEntity);
+				this.checkSubmitButtonEnabled();
 			}
-			this.bindView("/" + this.oRoutingParams.TeamViewEntity);
-			this.checkSubmitButtonEnabled();
 		}
 	},
 
 	onDetailChanged: function(sChanel, sEvent, oData) {
 		this.bindView(this.keyForView);
-		// var oModel = this.getView().getModel();
-		// oModel.read(this.keyForView, null, null, true, function(data) {
-		// 									console.log('successfully read master2 data');
-		// 								}, function() {
-		// 									console.log('error with reading of master2 data');
-		// 								});
 	},
 
 	bindView: function(sEntityPath) {
 		this.keyForView = sEntityPath;
 		var oView = this.getView();
-
-		var vBox = new sap.m.VBox();
-		vBox.addItem(new sap.m.Text({
-			text: "{Datetxt}"
-		}));
-		vBox.addItem(new sap.m.Text({
-			text: "{Hourstxt}"
-		}));
-		var oIconPerson = new sap.ui.core.Icon({
-			color: "#000000",
-			src: "sap-icon://person-placeholder",
-			visible: "{HasHda}"
-		});
-		var oIconPayment = new sap.ui.core.Icon({
-			color: "#000000",
-			src: "sap-icon://payment-approval",
-			visible: "{HasAllowance}"
-		});
-		var oIconComment = new sap.ui.core.Icon({
-			color: "#000000",
-			src: "sap-icon://comment",
-			visible: "{HasComment}"
-		});
-		var hBox = new sap.m.HBox();
-		hBox.addItem(vBox);
-		hBox.addItem(oIconPerson);
-		hBox.addItem(oIconPayment);
-		hBox.addItem(oIconComment);
-		var oList = this.getView().byId("master2List");
-		var oTemplate = new sap.m.CustomListItem({
-			tap: "onMaster2ListItemTap",
-			type: "Active",
-			attributes: [hBox]
-		});
-
-		oList.bindItems(this.keyForView, oTemplate, null, null);
 		// oView.bindElement(sEntityPath);
+		var oList = this.getView().byId("master2List");
+
+		var template = this.getView().byId("master2List").mBindingInfos.items.template;
+
+		oList.bindItems(this.keyForView + "/EmployeeViewSet", template, null, null);
 
 		//Check if the data is already on the client
-		if (!oView.getModel().getData(sEntityPath)) {
+		if (!oList.getModel().getData(sEntityPath + "/EmployeeViewSet")) {
 
 			// Check that the entity specified was found
-			oView.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
-				var oData = oView.getModel().getData(sEntityPath);
+			oList.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
+				// oView.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
+				var oData = oList.getModel().getData(sEntityPath + "/EmployeeViewSet");
 				if (!oData) {
 					this.showEmptyView();
 					this.fireDetailNotFound();
@@ -151,6 +118,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		// Get the list item either from the listItem parameter or from the event's
 		// source itself (will depend on the device-dependent mode)
 		this.showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
+		this.dontRefreshMaster2 = true;
 	},
 
 	showDetail: function(oItem) {

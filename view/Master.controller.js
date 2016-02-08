@@ -4,6 +4,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master", {
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 		this.getRouter().attachRoutePatternMatched(this.onRoutePatternMatched, this);
 		this.oRoutingParams = {};
+		var oEventBus = this.getEventBus();
+		oEventBus.subscribe("DetailViewSet1", "Changed", this.onDetailChanged, this);
 	},
 
 	onRouteMatched: function(oEvent) {
@@ -27,6 +29,19 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master", {
 			}
 		}
 	},
+
+	onDetailChanged: function(sChanel, sEvent, oData) {
+		this.bindView(this.keyForView);
+	},
+
+	bindView: function(sEntityPath) {
+		this.keyForView = sEntityPath;
+		var oList = this.getView().byId("master1List");
+
+		var template = this.getView().byId("master1List").mBindingInfos.items.template;
+
+		oList.bindItems("/TeamViewSet", template, null, null);
+},
 
 	onNotFound: function() {
 		this.getView().byId("master1List").removeSelections();
