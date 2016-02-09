@@ -33,7 +33,6 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 
 	bindView: function(sEntityPath) {
 		this.keyForView = sEntityPath;
-		var oView = this.getView();
 		// oView.bindElement(sEntityPath);
 		var oList = this.getView().byId("master2List");
 
@@ -45,7 +44,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		if (!oList.getModel().getData(sEntityPath + "/EmployeeViewSet")) {
 
 			// Check that the entity specified was found
-			oList.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
+			oList.attachEventOnce("dataReceived", jQuery.proxy(function() {
 				// oView.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
 				var oData = oList.getModel().getData(sEntityPath + "/EmployeeViewSet");
 				if (!oData) {
