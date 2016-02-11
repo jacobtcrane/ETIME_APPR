@@ -12,7 +12,7 @@ com.broadspectrum.etime.mgr.util.Dialogs = {
 		// 	if (oController.getOwnerComponent()._dialogMessagePopover.getBinding("items")) {
 		// 		oController.getOwnerComponent()._dialogMessagePopover.getBinding("items").filter([oFilter]);
 		// 	}
-		// filter method only works in higher UI5 runtime, so take matters into our own hands...
+		// filter method only works in higher UI5 runtime, potentially implement post-upgrade
 		var aFilteredMessages = $.map(sap.ui.getCore().getMessageManager().getMessageModel().oData, function(oMessage) {
 			if (oMessage.message) {
 				return oMessage;

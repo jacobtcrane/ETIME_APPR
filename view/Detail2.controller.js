@@ -114,13 +114,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 					dialog.close();
 					oModel.submitChanges({
 						success: $.proxy(function() {
-							// TODO: until we can figure out why batching doesn't work, check for messages
 							this.getView().setBusy(false);
-							//DJ: What's the point of this commented-out code? showMessagePopover doesn't even exist in this js
-							// if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
-							// 	// show odata errors in message popover
-							// 	this.showMessagePopover(this.byId("toolbar"));
-							// } else {
 								// raise a toast to the user!
 								this.navHistoryBack();
 								this.fireDetailChanged();
@@ -128,14 +122,11 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 							// }
 						}, this),
 						error: $.proxy(function() {
-							// show odata errors in message popover
-							// this.showMessagePopover(this.byId("toolbar"));
 							this.getView().setBusy(false);
 							var msg = 'Rejection submit encountered errors! Pleae review and retry.';
 							sap.m.MessageToast.show(msg);
 						}, this)
 					});
-					// 	this.navHistoryBack();
 				}, this)
 			}),
 			endButton: new sap.m.Button({
@@ -163,12 +154,6 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 		oModel.submitChanges({
 			success: $.proxy(function() {
 				this.getView().setBusy(false);
-				//DJ: What's the point of this commented-out code? showMessagePopover doesn't even exist in this js
-				// TODO: until we can figure out why batching doesn't work, check for messages
-				// if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
-				// 	// show odata errors in message popover
-				// 	this.showMessagePopover(this.byId("toolbar"));
-				// } else {
 					// raise a toast to the user!
 					this.navHistoryBack();
 					this.fireDetailChanged();
@@ -178,13 +163,10 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 			}, this),
 			error: $.proxy(function() {
 				this.getView().setBusy(false);
-				// show odata errors in message popover
-				// this.showMessagePopover(this.byId("toolbar"));
 				var msg = 'Approvals submit encountered errors! Pleae review and retry.';
 				sap.m.MessageToast.show(msg);
 			}, this)
 		});
-		// 		this.navHistoryBack();
 	}
 
 });

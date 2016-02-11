@@ -42,51 +42,6 @@
 					    visible="{parts : [{path : 'Enote'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>					    
 				</f:content>
 			</f:SimpleForm>
-			<!--<l:Grid defaultSpan="L12 M12 S12" width="auto">-->
-			<!--	<l:content>-->
-			<!--		<f:Form editable="true" id="detail2Form" maxContainerCols="6">-->
-			<!--			<f:layout>-->
-			<!--				<f:ResponsiveGridLayout columnsL="6" columnsM="6" columnsS="6" emptySpanL="4" emptySpanM="4" labelSpanL="2" labelSpanM="2" labelSpanS="2"/>-->
-			<!--			</f:layout>-->
-			<!--			<f:formContainers>-->
-			<!--				<f:FormContainer>-->
-			<!--					<f:formElements>-->
-			<!--						<f:FormElement label="">-->
-			<!--							<f:fields>-->
-			<!--								<Text id="TimeText" text="{Timetxt}"/>-->
-			<!--								<Text id="HoursTxt" text="{Hourstxt}"/>-->
-			<!--								<core:Icon color="#000000" src="sap-icon:/past"-->
-			<!--									visible="{parts : [{path : 'Vtken'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>-->
-			<!--							</f:fields>-->
-			<!--						</f:FormElement>-->
-			<!--						<f:FormElement>-->
-			<!--							<f:label>-->
-			<!--						        <Label text="WBS"/>-->
-			<!--						    </f:label>-->
-			<!--							<f:fields>-->
-			<!--								<Text value="{Wbs} - {Wbstxt}"/>-->
-			<!--							</f:fields>-->
-			<!--						</f:FormElement>-->
-			<!--						<f:FormElement>-->
-			<!--						<f:label><Label text="Order"/></f:label>-->
-			<!--							<f:fields>-->
-			<!--								<Text value="{Srvord} - {Ordertxt}"/>-->
-			<!--							</f:fields>-->
-			<!--						</f:FormElement>	-->
-			<!--						<f:FormElement>-->
-			<!--						<f:label>-->
-			<!--						    <Label text="Network"/>-->
-			<!--						</f:label>-->
-			<!--							<f:fields>-->
-			<!--								<Text value="{Nwhtxt} - {Networktxt}"/>-->
-			<!--							</f:fields>-->
-			<!--						</f:FormElement>									-->
-			<!--					</f:formElements>-->
-			<!--				</f:FormContainer>-->
-			<!--			</f:formContainers>-->
-			<!--		</f:Form>-->
-			<!--	</l:content>-->
-			<!--</l:Grid>-->
 		</content>
 		<footer>
 			<Toolbar>

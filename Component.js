@@ -136,11 +136,6 @@ sap.ui.core.UIComponent.extend("com.broadspectrum.etime.mgr.Component", {
 			this._startMockServer(sServiceUrl);
 		}
 
-		// Create and set domain model to the component
-		// 		var oModel = new sap.ui.model.odata.ODataModel(sServiceUrl, {
-		// 			json: true,
-		// 			loadMetadataAsync: true
-		// 		});
 		var oModel = new sap.ui.model.odata.v2.ODataModel(sServiceUrl);
 		oModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 		oModel.setDefaultCountMode(sap.ui.model.odata.CountMode.None);

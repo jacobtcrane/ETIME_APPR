@@ -51,7 +51,7 @@
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Ordertxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="12" Name="Nwh" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Network"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Networktxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
-				sap:sortable="false" sap:updatable="false"/><Property MaxLength="8" Name="Wbs" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Rec. WBS elem."
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="24" Name="Wbs" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Rec. WBS elem."
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Wbstxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="12" Name="Iaufnr" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Internal Order"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Iaufnrtxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
@@ -60,7 +60,10 @@
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Operationtxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false"
 				sap:label="Opr.
 				short
-				text" sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Rsnvar" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Reason"
+				text" sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Subop" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Suboperation"
+				sap:sortable="false" sap:updatable="false"/><Property MaxLength="40" Name="Suboptxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false"
+				sap:label="Suboperation
+				Text" sap:sortable="false" sap:updatable="false"/><Property MaxLength="4" Name="Rsnvar" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Reason"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="30" Name="Rsnvartxt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Description"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="144" Name="Enote" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Employee notes"
 				sap:sortable="false" sap:updatable="false"/><Property MaxLength="144" Name="Mnote" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Manager notes"

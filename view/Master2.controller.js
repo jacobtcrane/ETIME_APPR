@@ -33,7 +33,6 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 
 	bindView: function(sEntityPath) {
 		this.keyForView = sEntityPath;
-		// oView.bindElement(sEntityPath);
 		var oList = this.getView().byId("master2List");
 
 		var template = this.getView().byId("master2List").mBindingInfos.items.template;
@@ -45,7 +44,6 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 
 			// Check that the entity specified was found
 			oList.attachEventOnce("dataReceived", jQuery.proxy(function() {
-				// oView.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
 				var oData = oList.getModel().getData(sEntityPath + "/EmployeeViewSet");
 				if (!oData) {
 					this.showEmptyView();
@@ -136,7 +134,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 		// otherwise all service calls get batched together and the success/error outcome is clouded
 		oModel.submitChanges({
 			success: $.proxy(function() {
-				// TODO: until we can figure out why batching doesn't work, check for messages
+				// check for messages.  Potential improement area post-upgrade with batching handling
 				if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
 					// show odata errors in message popover
 					this.showMessagePopover(this.byId("toolbar"));

@@ -58,10 +58,6 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 
 	fireDetailChanged: function(sEntityPath) {
 		this.getEventBus().publish("DetailViewSet1", "Changed");
-
-		// this.getEventBus().publish("Detail", "Changed", {
-		// 	sEntityPath: sEntityPath
-		// });
 	},
 
 	fireDetailNotFound: function() {
@@ -96,7 +92,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 		} else {
 			// return status to original
 			// oModel.setProperty(pathStatus, oModel.getOriginalProperty(pathStatus));    // getOriginalProperty() not available in current runtime?
-			// in the absence of method getOriginalProperty() we'll use a hack to access the oData object directly
+			// in the absence of method getOriginalProperty() we'll this.  Potential spot for improvement post-upgrade
 			var oOriginalObject = oModel.oData[sContextPath.substr(1)];
 			if (oOriginalObject && oOriginalObject.Status && oOriginalObject.Statustxt) {
 				oModel.setProperty(pathStatus, oOriginalObject.Status);
@@ -127,13 +123,13 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 		// otherwise all service calls get batched together and the success/error outcome is clouded
 		oModel.submitChanges({
 			success: $.proxy(function() {
-				// TODO: until we can figure out why batching doesn't work, check for messages
+				// check for messages
 				if (sap.ui.getCore().getMessageManager().getMessageModel().oData.length > 0) {
 					// show odata errors in message popover
 					this.showMessagePopover(this.byId("toolbar"));
 				} else {
 					// raise a toast to the user!
-				// 	this.navHistoryBack();
+				// 	this.navHistoryBack(); //replaced for now as Welcome seems to make more sense. Get feedback in UAT
 				    this.getRouter().navTo("welcome");
 					this.onDetailChanged();
 					sap.m.MessageToast.show("Approvals submitted");
