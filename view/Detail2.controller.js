@@ -155,9 +155,9 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 			success: $.proxy(function() {
 				this.getView().setBusy(false);
 					// raise a toast to the user!
-					this.navHistoryBack();
 					this.fireDetailChanged();
 					sap.m.MessageToast.show("Approvals submitted");
+				    this.navHistoryBack();
 				// }
 
 			}, this),

@@ -6,6 +6,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master", {
 		this.oRoutingParams = {};
 		var oEventBus = this.getEventBus();
 		oEventBus.subscribe("DetailViewSet1", "Changed", this.onDetailChanged, this);
+		
 	},
 
 	onRouteMatched: function(oEvent) {
