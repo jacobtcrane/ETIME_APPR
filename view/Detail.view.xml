@@ -17,6 +17,7 @@
     							<Text text="{Timetxt}"/>
     							<Text text="{Atttxt}"/>
     							<Text text="{Costtxt}"/>
+    							<Text text="{Costnum}"/>
     						</VBox>
     						<core:Icon class="listIcons" color="#000000" src="sap-icon://person-placeholder"
     							visible="{parts : [{path : 'HasHda'}], formatter : 'com.broadspectrum.etime.mgr.util.Formatter.commonFieldVisibilityTrigger'}"/>
