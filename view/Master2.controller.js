@@ -140,7 +140,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 					this.showMessagePopover(this.byId("toolbar"));
 				} else {
 					// raise a toast to the user!
-					this.navHistoryBack();
+				// 	this.navHistoryBack();
+				this.getRouter().navTo("home");
 					sap.m.MessageToast.show("Approvals submitted");
 				}
 			}, this),
