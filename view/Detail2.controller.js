@@ -119,7 +119,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 								// this.navHistoryBack();
 								this.fireDetailChanged();
 								sap.m.MessageToast.show("Rejection submitted");
-								this.getRouter().navTo("home");
+								// this.getRouter().navTo("timesheets");
+								this.navHistoryBack();								
 							// }
 						}, this),
 						error: $.proxy(function() {
@@ -158,8 +159,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail2", {
 					// raise a toast to the user!
 					this.fireDetailChanged();
 					sap.m.MessageToast.show("Approvals submitted");
-				    // this.navHistoryBack();
-				    this.getRouter().navTo("home");
+				    this.navHistoryBack();
+				    // this.getRouter().navTo("timesheets");
 				// }
 
 			}, this),

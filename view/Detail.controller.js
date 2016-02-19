@@ -132,7 +132,8 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Detail", {
 				// 	this.navHistoryBack(); //replaced for now as Welcome seems to make more sense. Get feedback in UAT
 					this.onDetailChanged();
 					sap.m.MessageToast.show("Approvals submitted");
-				    this.getRouter().navTo("welcome");
+				    // this.getRouter().navTo("welcome");
+				    this.navHistoryBack();
 				}
 			}, this),
 			error: $.proxy(function() {
