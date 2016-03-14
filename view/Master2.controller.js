@@ -95,6 +95,7 @@ sap.ui.core.mvc.Controller.extend("com.broadspectrum.etime.mgr.view.Master2", {
 			// with a single nav controller we really just want to go back...
 			window.history.go(-1);
 		} else {
+		    this.dontRefreshMaster2 = false;
 			this.getRouter().navTo("home");
 		}
 	},
